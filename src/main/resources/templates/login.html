@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+
+        .logo-container {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: auto;
+            max-height: 80px;
+        }
+
+        .menu-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+
+        .menu li {
+            position: relative;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: white;
+            padding: 15px 20px;
+            display: block;
+            text-align: center;
+        }
+
+        .menu li a:hover {
+            background-color: #555;
+        }
+
+        .inicio-box, .login-box {
+            display: none;
+            position: absolute;
+            top: 50px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .inicio-box {
+            left: 0;
+            width: 250px;
+            text-align: center;
+        }
+
+        .inicio-box img {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .login-box {
+            right: 0;
+            width: 200px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 8px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .login-box button:hover {
+            background-color: #555;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .floating-image {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 150px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://pm1.aminoapps.com/8676/b27454f525259e9a8aa96f1845d6e4d61a16c39cr1-1080-1354v2_00.jpg" alt="Logo" class="logo">
+        </div>
+		<form th:action="@{/login}" method="post">
+        <nav class="menu-container">
+            <ul class="menu">
+                <li class="inicio">
+                    <a href="#" id="inicio-btn">Inicio</a>
+                    <div class="inicio-box" id="inicio-box">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1W1HEr3jxoUWia293PmVGpgKNkfM1Dgtcqg&s" alt="Imagen de inicio">
+                        <audio id="inicio-audio">
+                            <source src="FDownloader.net-1869734483519157-(64kbps).mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li class="login">
+                    <a href="#" id="login-btn">Ingresar</a>
+                    <div class="login-box" id="login-box">
+                        <label for="username">Usuario</label>
+                        <input type="text" id="username" name="username" required>
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" required>
+                        <button type="submit">Ingresar</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <img src="https://i.pinimg.com/originals/2d/25/0c/2d250c525973ca377c3a6f68f405a5e0.gif" id="floatingImage" class="floating-image">
+    <audio id="floating-audio">
+        <source src="cirnobaka.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.getElementById("login-btn").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("login-box").classList.toggle("show");
+        });
+
+        document.getElementById("inicio-btn").addEventListener("click", function(event) {
+            event.preventDefault();
+            let inicioBox = document.getElementById("inicio-box");
+            let inicioAudio = document.getElementById("inicio-audio");
+            inicioBox.classList.toggle("show");
+            if (inicioBox.classList.contains("show")) {
+                inicioAudio.play();
+            } else {
+                inicioAudio.pause();
+                inicioAudio.currentTime = 0;
+            }
+        });
+    </script>
+</body>
+</html>
